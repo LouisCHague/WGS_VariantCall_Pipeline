@@ -17,7 +17,8 @@ git clone https://github.com/username/WGS-variant-calling-pipeline.git
 cd WGS-variant-calling-pipeline
 
 ### Optional: Use the provided Docker container to avoid installing software dependencies individually:
-docker build -t wgs_variant_pipeline .
+docker build -t gatk_pipeline .
+docker run -v C:\Users\louis\gatk_pipeline\pipeline_folder:/app/pipeline_folder -it gatk_pipeline
 
 ## Requirements
 * GATK: Version 4.x or higher
