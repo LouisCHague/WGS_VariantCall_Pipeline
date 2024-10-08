@@ -1,8 +1,8 @@
 # WGS Variant Calling Pipeline
-This pipeline performs germline variant calling for Whole Genome Sequencing (WGS) data, specifically targeting short variant discovery of SNPs and Indels. The workflow is designed to follow the GATK Best Practices for variant calling, focusing on a single-sample analysis pipeline that aligns, pre-processes, and generates a final VCF file of variant calls using GATK HaplotypeCaller. This pipeline has been tested on yeast paired-end sequencing data.
+This pipeline performs germline variant calling for Whole Genome Sequencing (WGS) data, specifically targeting short variant discovery of SNPs and Indels. The workflow is designed to follow the [GATK Best Practices for variant calling](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels), focusing on a single-sample analysis pipeline that aligns, pre-processes, and generates a final VCF file of variant calls using GATK HaplotypeCaller. This pipeline has been tested on [Baker's yeast paired-end sequencing data](https://www.ncbi.nlm.nih.gov/sra/SRX26080880[accn]).
 
 ## Workflow
-The pipeline includes the following main steps:
+The pipeline includes the following main steps (I was unable to perform base quality recalibration as I could not find a variant file for Baker's Yeast):
 
 * Quality Control: Evaluate raw sequencing data quality using FastQC.
 * Trimming: Use Trimmomatic to remove low-quality reads and adapter sequences.
@@ -28,7 +28,7 @@ docker build -t gatk_pipeline .
 docker run -v C:\Users\louis\gatk_pipeline\pipeline_folder:/app/pipeline_folder -it gatk_pipeline
 
 ## Additional Information
-Your pipeline directory should contain directories such as aligned_reads, data, reads, results, scripts, supporting_files.
+Pipeline_folder should contain the directories: aligned_reads, data, reads, results, scripts, supporting_files.
 
 
 
