@@ -23,10 +23,9 @@ Copy code
 docker build -t wgs_variant_pipeline .
 
 ## Requirements
-Software
-GATK: Version 4.x or higher
-FastQC: Version 0.11.x or higher
-BWA: Version 0.7.17 or higher
-Samtools: Version 1.9 or higher
-Trimmomatic: Version 0.39 or higher
+* GATK: Version 4.x or higher
+* FastQC: Version 0.11.x or higher
+* BWA: Version 0.7.17 or higher
+* Samtools: Version 1.9 or higher
+* Trimmomatic: Version 0.39 or higher
 
