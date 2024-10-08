@@ -16,14 +16,19 @@ The pipeline includes the following main steps:
 git clone https://github.com/username/WGS-variant-calling-pipeline.git
 cd WGS-variant-calling-pipeline
 
-### Optional: Use the provided Docker container to avoid installing software dependencies individually:
-docker build -t gatk_pipeline .
-docker run -v C:\Users\louis\gatk_pipeline\pipeline_folder:/app/pipeline_folder -it gatk_pipeline
-
-## Requirements
+#### Requirements
 * GATK: Version 4.x or higher
 * FastQC: Version 0.11.x or higher
 * BWA: Version 0.7.17 or higher
 * Samtools: Version 1.9 or higher
 * Trimmomatic: Version 0.39 or higher
+
+### Optional: Use the provided Docker container to avoid installing software dependencies individually:
+docker build -t gatk_pipeline .
+docker run -v C:\Users\louis\gatk_pipeline\pipeline_folder:/app/pipeline_folder -it gatk_pipeline
+
+## Additional Information
+Your pipeline directory should contain directories such as aligned_reads, data, reads, results, scripts, supporting_files.
+
+
 
