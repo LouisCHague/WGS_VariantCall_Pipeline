@@ -5,7 +5,6 @@ This pipeline performs germline variant calling for Whole Genome Sequencing (WGS
 The pipeline includes the following main steps (I was unable to perform base quality recalibration as I could not find a variant file for Baker's Yeast):
 
 * Quality Control: Evaluate raw sequencing data quality using FastQC.
-* Trimming: Use Trimmomatic to remove low-quality reads and adapter sequences.
 * Alignment: Map trimmed reads to a reference genome using BWA-MEM.
 * Duplicate Marking: Mark duplicate reads using GATK MarkDuplicatesSpark.
 * Variant Calling: Detect SNPs and Indels using GATK HaplotypeCaller.
@@ -21,7 +20,6 @@ cd WGS-variant-calling-pipeline
 * FastQC: Version 0.11.x or higher
 * BWA: Version 0.7.17 or higher
 * Samtools: Version 1.9 or higher
-* Trimmomatic: Version 0.39 or higher
 
 ### Optional: Use the provided Docker container to avoid installing software dependencies individually:
 docker build -t gatk_pipeline .
