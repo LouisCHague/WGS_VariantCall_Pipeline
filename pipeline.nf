@@ -2,21 +2,21 @@
 
 nextflow.enable.dsl=2
 
-params.sra_id = "SRR30661808"
-params.genome = "/mnt/c/Users/louis/nextflow_test/genome/GCF_000146045.2_R64_genomic.fna"
+// Data
+params.reads = "$projectDir/reads/SRR*_{1,2}.fastq.gz"
+params.genome = "$projectDir/genome/GCF_000146045.2_R64_genomic.fna"
 
-// Download paired-end reads from SRA
-process PrefetchAndConvert {
+// FastQC Reads
+process FastQC {
     input:
-    val sra_id
+    tuple val(sra_id), path(pair_path)
 
     output:
-    path "./reads/${sra_id}_1.fastq.gz"
-    path "./reads/${sra_id}_2.fastq.gz"
+    path "fastqc_${sra_id}_logs"
 
     script:
     """
-    fastq-dump --split-files --gzip --outdir ./reads/ ${sra_id}
+    fastq.sh "$sra_id" "$pair_path"
     """
 }
 
@@ -34,12 +34,29 @@ process indexGenome {
     """
 }
 
+// Generate genome dictionary
+process createDict {
+    input:
+    path genome_path
 
+    output:
+    path "${genome_path}.dict"
+
+    script:
+    """
+    gatk CreateSequenceDictionary R=${genome_path} O=${genome_path}.dict
+    """
+}
 
 workflow {
-    // Install paired-end DNA reads
-    p_reads = PrefetchAndConvert(params.sra_id)
-    // Index genome 
-    p_index = indexGenome(params.genome)
+    Channel
+    .fromFilePairs(params.reads, checkIfExists:true)
+    .set { read_pairs_ch }
 
+    //read_pairs_ch.view()
+    FastQC(read_pairs_ch)
+
+    // Index genome and create dictionary
+    indexGenome(params.genome)
+    createDict(params.genome)
 }
